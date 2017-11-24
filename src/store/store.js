@@ -3,7 +3,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
-import DevTools from './../devTools.js';
+import DevTools from './../devtools';
 
 const configStore = compose(
 	applyMiddleware(thunk),

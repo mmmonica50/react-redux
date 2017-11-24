@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import logo from './logo.svg';
 import { connect } from 'react-redux';
 import { usersList } from "./actions/users";
-import DevTools from './devTools';
-import store from './stores/store';
+
+
+import store from './store/store';
+import DevTools from './devtools';
 
 class App extends Component {
 	render() {
-		console.log('users', this.props.users);
-		let allUsers = this.props.users.userData;
+		let allUsers = this.props.users.data;
 		return (
 			<div>
 				<section className="hero is-dark is-medium">
@@ -15,7 +18,7 @@ class App extends Component {
 					<header className="hero-body">
 						<div className="container">
 							<h1 className="title">Bienvenidos al infierno</h1>
-							<h3 className="subtitle">Muajaja</h3>
+							<h3 className="subtitle">Muajaja :)</h3>
 						</div>
 					</header>
 				</section>
@@ -25,6 +28,7 @@ class App extends Component {
 						<h4 className="title is-4">Usuarios</h4>
 
 						<div className="content">
+							<div className="message has-text-success">{this.props.users.message}</div>
 							<table className="table is-bordered">
 								<thead>
 								<tr>
@@ -41,7 +45,7 @@ class App extends Component {
 									return (
 										<tr key={key}>
 											<td>{allUsers[item].id}</td>
-											<td>{allUsers[item].name}</td>
+											<td><NavLink to={`/edit/${allUsers[item].id}`}>{allUsers[item].name}</NavLink></td>
 											<td>{allUsers[item].last_name}</td>
 											<td>{allUsers[item].slast_name}</td>
 											<td>{allUsers[item].email}</td>
@@ -64,11 +68,9 @@ class App extends Component {
 	}
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	const { users } = state;
-	return {
-		users
-	}
+	return {users}
 }
 
 export default connect(mapStateToProps)(App);
